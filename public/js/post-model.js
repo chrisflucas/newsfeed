@@ -12,7 +12,15 @@
    *  results -- an array of newsfeed posts
    */
   PostModel.loadAll = function(callback) {
-    // TODO
+    var request = new XMLHttpRequest();
+
+    request.addEventListener('load', function (event) {
+      if (request.status === STATUS_OK) callback(null, JSON.parse(request.responseText));
+      else callback(request.responseText);
+    });
+
+    request.open('GET', POSTS_URL);
+    request.send();
   };
 
   /* Adds the given post to the list of posts. The post must *not* have
@@ -23,7 +31,16 @@
    *  post -- the post added, with an _id attribute
    */
   PostModel.add = function(post, callback) {
-    // TODO
+    var request = new XMLHttpRequest();
+
+    request.addEventListener('load', function (event) {
+      if (request.status === STATUS_OK) callback(null, JSON.parse(request.responseText));
+      else callback(request.responseText);
+    });
+
+    request.open('POST', POSTS_URL);
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(JSON.stringify(post));
   };
 
   /* Removes the post with the given id.
@@ -32,7 +49,16 @@
    *  error -- the error that occurred or null if no error occurred
    */
   PostModel.remove = function(id, callback) {
-    // TODO
+    var request = new XMLHttpRequest();
+
+    request.addEventListener('load', function (event) {
+      if (request.status === STATUS_OK) callback(null);
+      else callback(request.responseText);
+    });
+
+    request.open('POST', POSTS_URL + '/remove');
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(JSON.stringify({id: id}));
   };
 
   /* Upvotes the post with the given id.
@@ -42,7 +68,16 @@
    *  post -- the updated post model
    */
   PostModel.upvote = function(id, callback) {
-    // TODO
+    var request = new XMLHttpRequest();
+
+    request.addEventListener('load', function (event) {
+      if (request.status === STATUS_OK) callback(null, JSON.parse(request.responseText));
+      else callback(request.responseText);
+    });
+
+    request.open('POST', POSTS_URL + '/upvote');
+    request.setRequestHeader('Content-type', 'application/json');
+    request.send(JSON.stringify({id: id}));
   };
 
   window.PostModel = PostModel;
