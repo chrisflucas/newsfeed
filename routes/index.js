@@ -48,9 +48,9 @@ module.exports = function(app) {
 
   // Read posts
   app.get('/posts', function (request, response) {
-    Posts.find(function (error, posts) {
+    Post.find(function (error, posts) {
       if (error) throw error;
-      response.json(STATUS_OK, people);
+      response.json(STATUS_OK, posts);
     });
   });
 
@@ -85,6 +85,7 @@ module.exports = function(app) {
       post.upvotes++;
       post.save(function (error) {
         if (error) throw error;
+        response.json(STATUS_OK, post);
       });
     });
   });
