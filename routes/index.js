@@ -20,8 +20,11 @@ module.exports = function(app) {
 
     soundcloud.search(query, function (error, results) {
       if (error) throw error;
-      results[0].api = 'soundcloud';
-      allResults.push(results[0]);
+
+      if (results.length > 0) {
+        results[0].api = 'soundcloud';
+        allResults.push(results[0]);
+      }
 
       apisDone++;
       if (apisDone === NUM_APIS) response.json(STATUS_OK, allResults);
@@ -29,8 +32,11 @@ module.exports = function(app) {
 
     youtube.search(query, function (error, results) {
       if (error) throw error;
-      results[0].api = 'youtube';
-      allResults.push(results[0]);
+
+      if (results.length > 0) {
+        results[0].api = 'youtube';
+        allResults.push(results[0]);
+      }
 
       apisDone++;
       if (apisDone === NUM_APIS) response.json(STATUS_OK, allResults);
@@ -38,8 +44,11 @@ module.exports = function(app) {
 
     flickr.search(query, function (error, results) {
       if (error) throw error;
-      results[0].api = 'flickr';
-      allResults.push(results[0]);
+
+      if (results.length > 0) {
+        results[0].api = 'flickr';
+        allResults.push(results[0]);
+      }
 
       apisDone++;
       if (apisDone === NUM_APIS) response.json(STATUS_OK, allResults);

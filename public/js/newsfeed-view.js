@@ -44,7 +44,6 @@
       PostModel.upvote(post._id, function (error, post) {
         if (error) $('.error').html(error);
 
-        console.log(post.upvotes);
         $post.find('.upvote-count').html(post.upvotes);
       });
     });
